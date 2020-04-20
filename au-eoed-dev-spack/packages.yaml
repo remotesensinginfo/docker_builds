@@ -1,0 +1,21 @@
+packages:
+  python:
+    version: [3.7.4]
+    variants: +shared+tkinter+uuid
+  py-numpy:
+    variants: ^openblas
+  hdf5:
+    variants: +cxx+hl+shared~mpi
+  netcdf:
+    variants: ~mpi
+  py-h5py:
+    variants: ~mpi
+  gdal:
+    version: [3.0.1]
+    variants: +python+qhull+sqlite3+armadillo+geos+kea+hdf5+openjpeg+pg+netcdf
+  libsigcpp:
+    version: [2.9.3]
+
+
+
+
