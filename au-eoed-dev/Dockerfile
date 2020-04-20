@@ -26,7 +26,7 @@ RUN conda install --yes -c conda-forge python=3.7; sync && conda update --yes -n
     && conda clean --all -y; sync \
     && conda clean -tipsy && sync
 
-RUN pip install pyod fiona geopandas schedule gsutil cvxopt dropbox  && sync
+RUN pip install pyod fiona geopandas gsutil cvxopt dropbox  && sync
 
 # set gdal and proj data paths
 ENV GDAL_DATA=/opt/miniconda/share/gdal
