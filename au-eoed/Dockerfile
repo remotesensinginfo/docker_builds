@@ -23,10 +23,10 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
 RUN conda install --yes -c conda-forge python=3.8 && conda update --yes -n base conda
 
 # Install AU-EOED software stack
-RUN conda install --yes -c conda-forge python=3.8 arcsi rsgislib scikit-learn scikit-image scikit-optimize scikit-plot scikit-fuzzy bayesian-optimization matplotlib pandas statsmodels h5py scipy rasterio shapely rasterio networkx sqlalchemy pycurl xgboost catboost lightgbm tpot seaborn ml_tooling cartopy numba pip sphinx elevation rtree tqdm jinja2 keras keras-preprocessing pytables parallel plotly bokeh pygal jupyterlab psutil weasyprint \
+RUN conda install --yes -c conda-forge python=3.8 arcsi rsgislib scikit-learn scikit-image scikit-optimize matplotlib h5py scipy pip tqdm parallel xgboost lightgbm statsmodels pycurl jupyterlab plotly rtree jinja2 pytables psutil sphinx elevation scikit-plot bayesian-optimization shapely numba sqlalchemy rasterio networkx seaborn tpot \
 && conda clean --yes -t
 
-RUN pip install pyod fiona geopandas gsutil cvxopt dropbox
+RUN pip install pandas tensorflow pyod fiona geopandas gsutil cvxopt dropbox alphashape
 
 # set gdal and proj data paths
 ENV GDAL_DATA=/opt/miniconda/share/gdal
