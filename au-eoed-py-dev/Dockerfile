@@ -26,7 +26,7 @@ RUN conda install --yes -c conda-forge python=3.7 && conda update --yes -n base 
 RUN conda install --yes -c conda-forge python=3.7 arcsi rsgislib scikit-learn scikit-image scikit-optimize scikit-plot scikit-fuzzy bayesian-optimization matplotlib pandas statsmodels h5py scipy rasterio shapely networkx sqlalchemy pycurl xgboost catboost lightgbm tpot seaborn ml_tooling cartopy numba pip sphinx elevation rtree tqdm jinja2 keras keras-preprocessing pytables parallel plotly bokeh pygal jupyterlab psutil weasyprint parallel pyyaml psycopg2 \
 && conda clean --yes -t
 
-RUN pip install pyod fiona geopandas gsutil cvxopt dropbox google-cloud-storage google-cloud-bigquery 
+RUN pip install pyod fiona geopandas gsutil cvxopt dropbox google-cloud-storage google-cloud-bigquery alphashape
 
 # set gdal and proj data paths
 ENV GDAL_DATA=/opt/miniconda/share/gdal
