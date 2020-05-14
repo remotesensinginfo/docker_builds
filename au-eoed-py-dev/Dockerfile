@@ -1,10 +1,11 @@
-FROM google/cloud-sdk
+FROM ubuntu:latest
 
 LABEL authors="Pete Bunting"
 LABEL maintainer="petebunting@mac.com"
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/miniconda/bin:$PATH
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update --fix-missing && \
     apt-get install -y apt-utils wget bzip2 ca-certificates curl git binutils vim make unzip apt-transport-https gnupg libfftw3-dev gnuplot libgtk2.0-dev libgdal-dev libhdf5-dev libblas-dev libblas3 liblapack-dev liblapack3 liblapack-doc make && \
@@ -19,14 +20,14 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
     echo ". /opt/miniconda/etc/profile.d/conda.sh" >> ~/.bashrc && \
     echo "conda activate base" >> ~/.bashrc
 
-# use python 3.8 and update conda 
+# use python 3.7 and update conda 
 RUN conda install --yes -c conda-forge python=3.7 && conda update --yes -n base conda
 
 # Install AU-EOED software stack
 RUN conda install --yes -c conda-forge python=3.7 arcsi rsgislib scikit-learn scikit-image scikit-optimize scikit-plot scikit-fuzzy bayesian-optimization matplotlib pandas statsmodels h5py scipy rasterio shapely networkx sqlalchemy pycurl xgboost catboost lightgbm tpot seaborn ml_tooling cartopy numba pip sphinx elevation rtree tqdm jinja2 keras keras-preprocessing pytables parallel plotly bokeh pygal jupyterlab psutil weasyprint parallel pyyaml psycopg2 \
 && conda clean --yes -t
 
-RUN pip install pyod fiona geopandas gsutil cvxopt dropbox google-cloud-storage google-cloud-bigquery alphashape
+RUN pip install pyod fiona geopandas cvxopt dropbox google-cloud-storage google-cloud-bigquery alphashape
 
 # set gdal and proj data paths
 ENV GDAL_DATA=/opt/miniconda/share/gdal
@@ -87,6 +88,20 @@ RUN cd $GAMMA_HOME/DISP/src; make -f makefile_static     \
     && cd $GAMMA_HOME/ISP/src; make -f makefile_static   \
     && sync
 
+
+# Install google cloud tools
+RUN mkdir -p /opt/google_cloud && \
+    cd /opt/google_cloud && \
+    curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-291.0.0-linux-x86_64.tar.gz && \
+    tar -zxvf google-cloud-sdk-291.0.0-linux-x86_64.tar.gz google-cloud-sdk && \
+    sh ./google-cloud-sdk/install.sh -q && \
+    echo 'source /opt/google_cloud/google-cloud-sdk/completion.bash.inc' >> ~/.bashrc && \
+    echo 'source /opt/google_cloud/google-cloud-sdk/path.bash.inc' >> ~/.bashrc && \
+    sync
+
+ENV PATH=$PATH:/opt/google_cloud/google-cloud-sdk/bin
+
+WORKDIR /home
 
 # Add Tini
 ENV TINI_VERSION v0.18.0
