@@ -37,7 +37,6 @@ ENV PROJ_LIB=/opt/miniconda/share/proj
 RUN mkdir -p /opt/eodatadown . && \
     cd /opt/eodatadown && \
     git clone https://github.com/remotesensinginfo/eodatadown.git . && \
-    git checkout development && \
     python ./setup.py install && \
     cd /opt && \
     rm -Rf ./eodatadown && \
