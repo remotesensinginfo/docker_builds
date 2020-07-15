@@ -21,12 +21,14 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
 
 # Use python 3.7, update conda base and install AU-EOED software stack
 RUN conda install --yes -c conda-forge python=3.7; sync && conda update --yes -n base conda; sync && \
-    conda install --yes -c au-eoed -c conda-forge python=3.7 eodatadown arcsi rsgislib pb_process_tools sen1-ard-gamma compute-job-recorder scikit-learn scikit-image scikit-optimize scikit-plot scikit-fuzzy bayesian-optimization matplotlib pandas statsmodels h5py scipy rasterio shapely networkx sqlalchemy pycurl xgboost catboost lightgbm tpot seaborn ml_tooling cartopy numba pip sphinx elevation rtree luigi tqdm weasyprint jinja2 keras keras-preprocessing pytables parallel plotly bokeh pygal jupyterlab psutil pysal libpysal esda; sync \
+    conda install --yes -c au-eoed -c conda-forge python=3.7 eodatadown arcsi rsgislib pb_process_tools sen1-ard-gamma pysl4land compute-job-recorder scikit-learn scikit-image scikit-optimize scikit-plot scikit-fuzzy bayesian-optimization matplotlib pandas statsmodels h5py scipy rasterio shapely networkx sqlalchemy pycurl xgboost catboost lightgbm tpot seaborn ml_tooling cartopy numba pip sphinx elevation rtree luigi tqdm weasyprint jinja2 keras keras-preprocessing pytables parallel plotly bokeh pygal jupyterlab psutil pysal libpysal esda; sync \
     && chmod +x /opt/miniconda/bin/*; sync \
     && conda clean --all -y; sync \
     && conda clean -tipsy && sync
 
-RUN pip install pyod fiona geopandas gsutil cvxopt dropbox  && sync
+#RUN pip install pyod fiona geopandas gsutil cvxopt dropbox  && sync
+RUN pip install pyod cvxopt gsutil feather-format openpyxl  && sync
+
 
 # set gdal and proj data paths
 ENV GDAL_DATA=/opt/miniconda/share/gdal
