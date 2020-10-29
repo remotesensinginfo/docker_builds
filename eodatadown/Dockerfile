@@ -35,6 +35,9 @@ RUN mkdir -p /opt/google_cloud && \
     echo 'source /opt/google_cloud/google-cloud-sdk/path.bash.inc' >> ~/.bashrc && \
     sync
 
+# Fix for install issue where google-cloud bigquery doesn't install
+RUN pip install google-cloud-bigquery google-cloud-bigquery[opentelemetry] opentelemetry-exporter-google-cloud
+
 ENV PATH=$PATH:/opt/google_cloud/google-cloud-sdk/bin
 
 WORKDIR /home
