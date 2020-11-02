@@ -7,6 +7,8 @@ ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/miniconda/bin:$PATH
 ENV DEBIAN_FRONTEND=noninteractive
 
+RUN conda install -c conda-forge psycopg2
+
 # Install latest version of EODataDown
 RUN mkdir -p /opt/eodatadown . && \
     cd /opt/eodatadown && \

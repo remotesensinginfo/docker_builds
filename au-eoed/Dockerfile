@@ -23,7 +23,7 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
 RUN conda install --yes -c conda-forge python=3.8 && conda update --yes -n base conda
 
 # Install AU-EOED software stack
-RUN conda install --yes -c conda-forge python=3.8 arcsi rsgislib scikit-learn scikit-image scikit-optimize matplotlib h5py scipy pip tqdm parallel xgboost lightgbm statsmodels pycurl jupyterlab plotly rtree jinja2 pytables psutil sphinx elevation scikit-plot bayesian-optimization shapely numba sqlalchemy rasterio networkx seaborn tpot \
+RUN conda install --yes -c conda-forge python=3.8 arcsi rsgislib scikit-learn scikit-image scikit-optimize matplotlib h5py scipy pip tqdm parallel xgboost lightgbm statsmodels pycurl jupyterlab plotly rtree jinja2 pytables psutil sphinx elevation scikit-plot bayesian-optimization shapely numba sqlalchemy rasterio networkx seaborn tpot psycopg2 \
 && conda clean --yes -t
 
 RUN pip install pandas tensorflow pyod fiona geopandas gsutil cvxopt dropbox alphashape
