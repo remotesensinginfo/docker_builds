@@ -20,14 +20,15 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
     echo "conda activate base" >> ~/.bashrc
 
 # Use python 3.7, update conda base and install AU-EOED software stack
-RUN conda install --yes -c conda-forge python=3.9; sync && conda update --yes -n base conda; sync && \
-    conda install --yes -c au-eoed -c conda-forge python=3.9 rsgislib pb_process_tools scikit-learn scikit-image scikit-optimize scikit-plot scikit-fuzzy bayesian-optimization matplotlib pandas statsmodels h5py scipy rasterio shapely networkx sqlalchemy pycurl xgboost catboost lightgbm tpot seaborn ml_tooling cartopy numba pip sphinx elevation rtree luigi tqdm weasyprint jinja2 keras keras-preprocessing pytables parallel plotly bokeh pygal jupyterlab psutil pysal libpysal esda pyyaml netcdf4 xarray rasterstats; sync \
-    && chmod +x /opt/miniconda/bin/*; sync \
+RUN conda install --yes -c conda-forge python=3.9; sync && conda update --yes -n base conda; sync 
+#RUN conda install --yes -c au-eoed -c conda-forge python=3.9 rsgislib pb_process_tools scikit-learn scikit-image scikit-optimize matplotlib pandas statsmodels h5py scipy rasterio shapely sqlalchemy pycurl  numba pip sphinx rtree tqdm parallel plotly psutil pyyaml; sync 
+RUN conda install --yes -c au-eoed -c conda-forge python=3.9 rsgislib pb_process_tools scikit-learn scikit-image scikit-optimize statsmodels matplotlib pandas h5py scipy rasterio shapely sqlalchemy pycurl numba  pip sphinx rtree parallel plotly psutil pyyaml psycopg2; sync 
+RUN chmod +x /opt/miniconda/bin/*; sync \
     && conda clean --all -y; sync \
     && conda clean -tipsy && sync
 
 #RUN pip install pyod fiona geopandas gsutil cvxopt dropbox  && sync
-RUN pip install pyod cvxopt gsutil feather-format openpyxl SALib alphashape && sync
+RUN pip install pyod geopandas xlsxwriter cvxopt gsutil feather-format openpyxl SALib alphashape && sync
 
 
 # set gdal and proj data paths
