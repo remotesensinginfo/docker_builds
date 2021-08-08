@@ -20,14 +20,15 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
     echo "conda activate base" >> ~/.bashrc
 
 # Use python 3.7, update conda base and install AU-EOED software stack
-RUN conda install --yes -c conda-forge python=3.7; sync && conda update --yes -n base conda; sync && \
-    conda install --yes -c au-eoed -c conda-forge python=3.7 eodatadown arcsi rsgislib pb_process_tools sen1-ard-gamma pysl4land compute-job-recorder scikit-learn=0.23.1 scikit-image scikit-optimize scikit-plot scikit-fuzzy bayesian-optimization matplotlib pandas statsmodels h5py scipy rasterio shapely networkx sqlalchemy pycurl xgboost catboost lightgbm tpot seaborn ml_tooling cartopy numba pip sphinx elevation rtree luigi tqdm weasyprint jinja2 keras keras-preprocessing pytables parallel plotly bokeh pygal jupyterlab psutil pysal libpysal esda pyyaml netcdf4 xarray rasterstats; sync \
+RUN conda install --yes -c conda-forge python=3.7; sync && conda update --yes -n base conda; sync
+
+RUN conda install --yes -c au-eoed -c conda-forge python=3.7 rsgislib pb_process_tools h5py parallel xgboost matplotlib pycurl psycopg2; sync \
     && chmod +x /opt/miniconda/bin/*; sync \
     && conda clean --all -y; sync \
     && conda clean -tipsy && sync
 
 #RUN pip install pyod fiona geopandas gsutil cvxopt dropbox  && sync
-RUN pip install pyod cvxopt gsutil feather-format openpyxl SALib alphashape && sync
+RUN pip install pyod cvxopt gsutil feather-format openpyxl SALib alphashape geopandas scikit-image scikit-optimize && sync
 
 # Install Open Data Cube.
 #RUN cd /opt && \
