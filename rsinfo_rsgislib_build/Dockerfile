@@ -29,7 +29,7 @@ RUN conda install --yes -c conda-forge python=3.9; sync && conda update --yes -n
     && conda clean --all -y; sync \
     && conda clean -tipsy && sync
 
-RUN pip install geopandas pyod cvxopt gsutil feather-format openpyxl SALib alphashape xlsxwriter black flake8 pylint pytest && sync
+RUN pip install geopandas pyod cvxopt gsutil feather-format openpyxl SALib alphashape xlsxwriter black flake8 pylint pytest pytest-html coverage pytest-cov pysptools pymcr && sync
 
 # set gdal and proj data paths
 ENV GDAL_DATA=/opt/miniconda/share/gdal
