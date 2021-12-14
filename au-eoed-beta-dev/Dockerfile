@@ -22,7 +22,8 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
 # Use python 3.7, update conda base and install AU-EOED software stack
 RUN conda install --yes -c conda-forge python=3.9; sync && conda update --yes -n base conda; sync 
 #RUN conda install --yes -c au-eoed -c conda-forge python=3.9 rsgislib pb_process_tools scikit-learn scikit-image scikit-optimize matplotlib pandas statsmodels h5py scipy rasterio shapely sqlalchemy pycurl  numba pip sphinx rtree tqdm parallel plotly psutil pyyaml; sync 
-RUN conda install --yes -c au-eoed -c conda-forge python=3.9 rsgislib pb_process_tools scikit-learn scikit-image scikit-optimize statsmodels matplotlib pandas h5py scipy rasterio shapely sqlalchemy pycurl numba  pip sphinx rtree parallel plotly psutil pyyaml psycopg2; sync 
+#RUN conda install --yes -c au-eoed -c conda-forge python=3.9 rsgislib pb_process_tools scikit-learn scikit-image scikit-optimize statsmodels matplotlib pandas h5py scipy rasterio shapely sqlalchemy pycurl numba  pip sphinx rtree parallel plotly psutil pyyaml psycopg2; sync 
+RUN conda install --yes -c au-eoed -c conda-forge python=3.9 rsgislib pb_process_tools gdal=3.4 h5py scipy pip tqdm scikit-learn scikit-image sqlalchemy pycurl numba sphinx rtree pyyaml matplotlib pandas rtree 
 RUN chmod +x /opt/miniconda/bin/*; sync \
     && conda clean --all -y; sync \
     && conda clean -tipsy && sync
