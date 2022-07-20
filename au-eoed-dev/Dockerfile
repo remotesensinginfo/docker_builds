@@ -36,7 +36,7 @@ RUN cd /opt && \
     cd pb_process_tools && \
     python setup.py install && \
     cd /opt && \
-    rm -Rf ./pb_process_tools* && \
+    rm -Rf ./pb_process_tools && \
     sync
     
 # Install pysl4land.
@@ -45,7 +45,7 @@ RUN cd /opt && \
     cd pysl4land && \
     python setup.py install && \
     cd /opt && \
-    rm -Rf ./pysl4land* && \
+    rm -Rf ./pysl4land && \
     sync
 
 # set gdal and proj data paths
