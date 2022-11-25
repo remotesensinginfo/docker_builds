@@ -7,7 +7,7 @@ ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH=/opt/miniconda/bin:$PATH
 
 RUN apt-get update --fix-missing && \
-    apt-get install -y apt-utils wget bzip2 ca-certificates curl git binutils vim make unzip && \
+    apt-get install -y apt-utils wget bzip2 ca-certificates curl git binutils vim make unzip wget && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -22,13 +22,12 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
 RUN conda install --yes -c conda-forge python=3.10; sync \
     && conda install --yes mamba -n base -c conda-forge; sync
 
-# Removed alphashape and elevation as clashed with pycaret
 # Install AU EOED software stack
-RUN mamba install --yes -c conda-forge rsgislib gdal h5py parallel scikit-learn scikit-image scikit-optimize imbalanced-learn scikit-plot scikit-fuzzy bayesian-optimization matplotlib pandas geopandas statsmodels scipy rasterio shapely networkx sqlalchemy pycurl xgboost lightgbm catboost pycaret tensorflow tpot seaborn ml_tooling numba pip sphinx rtree tqdm jinja2 bokeh pygal jupyterlab psutil pysal libpysal esda pyyaml netcdf4 xarray fiona plotly psycopg2 ipywidgets contextily pydot cvxopt feather-format pyod xlsxwriter openpyxl SALib pymcr gsutil rasterstats pytables; sync \
+RUN mamba install --yes -c conda-forge rsgislib arcsi gdal h5py parallel scikit-learn scikit-image scikit-optimize imbalanced-learn scikit-plot scikit-fuzzy bayesian-optimization matplotlib pandas geopandas statsmodels scipy rasterio shapely networkx sqlalchemy pycurl xgboost lightgbm catboost tensorflow tpot seaborn ml_tooling numba pip sphinx rtree tqdm jinja2 bokeh pygal jupyterlab psutil pysal libpysal esda pyyaml netcdf4 xarray fiona plotly psycopg2 ipywidgets contextily pydot cvxopt feather-format pyod xlsxwriter openpyxl SALib pymcr gsutil rasterstats pytables alphashape elevation; sync \
     && chmod +x /opt/miniconda/bin/*; sync \
     && conda clean --all -y; sync
 
-RUN pip install matplotlib_scalebar pysptools && sync
+RUN pip install matplotlib_scalebar pysptools pysondb && sync
 
 # Install pb_process_tools.
 RUN cd /opt && \
