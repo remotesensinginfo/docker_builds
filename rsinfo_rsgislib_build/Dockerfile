@@ -17,17 +17,20 @@ RUN apt-get update --fix-missing && \
 RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
     /bin/bash ~/miniconda.sh -b -p /opt/miniconda && \
     rm ~/miniconda.sh && \
-    /opt/miniconda/bin/conda clean -tipsy && \
+    /opt/miniconda/bin/conda clean --all -y && \
     ln -s /opt/miniconda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
     echo ". /opt/miniconda/etc/profile.d/conda.sh" >> ~/.bashrc && \
     echo "conda activate base" >> ~/.bashrc
 
-# Use python 3.9, update conda base and install AU-EOED software stack
-RUN conda install --yes -c conda-forge python=3.9; sync && conda update --yes -n base conda; sync && \
-    conda install --yes -c au-eoed -c conda-forge python=3.9 gdal geos gsl kealib xerces-c muparser boost-cpp rios scikit-learn scikit-image scikit-optimize imbalanced-learn scikit-plot scikit-fuzzy bayesian-optimization matplotlib pandas geopandas statsmodels h5py scipy rasterio shapely networkx sqlalchemy pycurl xgboost catboost lightgbm tpot seaborn ml_tooling cartopy numba pip sphinx elevation rtree tqdm jinja2 keras keras-preprocessing pytables parallel bokeh pygal jupyterlab psutil pysal libpysal esda pyyaml netcdf4 xarray rasterstats fiona plotly python-kaleido; sync \
+# Use python 3.10, update conda base and install AU-EOED software stack
+RUN conda install --yes -c conda-forge python=3.10; sync \
+    && conda update --yes -n base conda; sync \
+    && conda install --yes mamba -n base -c conda-forge; sync
+    
+RUN mamba install --yes -c au-eoed -c conda-forge python=3.10 gdal geos gsl kealib xerces-c muparser boost-cpp rios scikit-learn scikit-image scikit-optimize imbalanced-learn scikit-plot scikit-fuzzy bayesian-optimization matplotlib pandas geopandas statsmodels h5py scipy rasterio shapely networkx sqlalchemy pycurl xgboost catboost lightgbm tpot seaborn ml_tooling cartopy numba pip sphinx elevation rtree tqdm jinja2 keras keras-preprocessing pytables parallel bokeh pygal jupyterlab psutil pysal libpysal esda pyyaml netcdf4 xarray rasterstats fiona plotly python-kaleido; sync \
     && chmod +x /opt/miniconda/bin/*; sync \
-    && conda clean --all -y; sync \
-    && conda clean -tipsy && sync
+    && conda clean --all -y; sync 
+
 
 RUN pip install pyod cvxopt gsutil feather-format openpyxl SALib alphashape xlsxwriter black flake8 pylint pytest pytest-html coverage pytest-cov pysptools pymcr && sync
 
