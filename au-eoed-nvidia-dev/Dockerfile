@@ -31,12 +31,13 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
 RUN conda install --yes -c conda-forge python=3.10; sync \
     && conda install --yes mamba -n base -c conda-forge; sync
 
-RUN mamba install --yes -c conda-forge rsgislib gdal h5py parallel scikit-learn scikit-image scikit-optimize imbalanced-learn scikit-plot scikit-fuzzy bayesian-optimization matplotlib pandas geopandas statsmodels scipy rasterio shapely networkx sqlalchemy pycurl xgboost lightgbm catboost pytorch-gpu torchvision tpot seaborn ml_tooling numba pip sphinx rtree tqdm jinja2 bokeh pygal jupyterlab psutil pysal libpysal esda pyyaml netcdf4 xarray fiona plotly psycopg2 ipywidgets contextily pydot cvxopt feather-format pyod xlsxwriter openpyxl SALib pymcr gsutil rasterstats; sync \
+RUN mamba install --yes -c conda-forge rsgislib gdal h5py parallel scikit-learn scikit-image scikit-optimize imbalanced-learn scikit-plot scikit-fuzzy bayesian-optimization matplotlib pandas geopandas statsmodels scipy rasterio shapely networkx sqlalchemy pycurl py-xgboost-gpu catboost pytorch-gpu torchvision tpot seaborn ml_tooling numba pip sphinx rtree tqdm jinja2 bokeh pygal jupyterlab psutil pysal libpysal esda pyyaml netcdf4 xarray fiona plotly psycopg2 ipywidgets contextily pydot cvxopt feather-format pyod xlsxwriter openpyxl SALib pymcr gsutil rasterstats pytables; sync \
     && chmod +x /opt/miniconda/bin/*; sync \
     && conda clean --all -y; sync
 
 
-RUN pip install matplotlib_scalebar pysptools pysondb tensorflow && sync
+RUN pip install matplotlib_scalebar pysptools pysondb tensorflow; sync && \
+   pip install lightgbm --install-option=--gpu; sync
 
 # Install pb_process_tools.
 RUN cd /opt && \
