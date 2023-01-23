@@ -23,7 +23,7 @@ RUN conda install --yes -c conda-forge python=3.10; sync \
     && conda install --yes mamba -n base -c conda-forge; sync
 
 # Install AU EOED software stack
-RUN mamba install --yes -c conda-forge rsgislib=5.0.12 arcsi=4.0.2 gdal=3.6.1 h5py parallel scikit-learn scikit-image scikit-optimize imbalanced-learn scikit-plot scikit-fuzzy bayesian-optimization matplotlib pandas geopandas statsmodels scipy rasterio shapely networkx sqlalchemy pycurl xgboost lightgbm catboost tensorflow alphashape tpot seaborn ml_tooling numba pip sphinx rtree tqdm jinja2 bokeh pygal jupyterlab psutil pysal libpysal esda pyyaml netcdf4 xarray fiona plotly ipywidgets contextily pydot cvxopt feather-format pyod xlsxwriter openpyxl pytables SALib pymcr gsutil mpi4py openmpi; sync \
+RUN mamba install --yes -c conda-forge rsgislib=5.0.13 arcsi=4.0.2 gdal=3.6.2 h5py parallel scikit-learn scikit-image scikit-optimize imbalanced-learn scikit-plot scikit-fuzzy bayesian-optimization matplotlib pandas geopandas statsmodels scipy rasterio shapely networkx sqlalchemy pycurl xgboost lightgbm catboost tensorflow alphashape tpot seaborn ml_tooling numba pip sphinx rtree tqdm jinja2 bokeh pygal jupyterlab psutil pysal libpysal esda pyyaml netcdf4 xarray fiona plotly ipywidgets contextily pydot cvxopt feather-format pyod xlsxwriter openpyxl pytables SALib pymcr gsutil mpi4py openmpi; sync \
     && chmod +x /opt/miniconda/bin/*; sync \
     && conda clean --all -y; sync
 
@@ -35,7 +35,7 @@ RUN pip install psycopg2 && sync
 RUN cd /opt && \
     git clone https://github.com/remotesensinginfo/pb_process_tools.git && \
     cd pb_process_tools && \
-    python setup.py install && \
+    pip install . && \
     cd /opt && \
     rm -Rf ./pb_process_tools && \
     sync
@@ -44,7 +44,7 @@ RUN cd /opt && \
 RUN cd /opt && \
     git clone https://github.com/remotesensinginfo/pysl4land.git && \
     cd pysl4land && \
-    python setup.py install && \
+    pip install . && \
     cd /opt && \
     rm -Rf ./pysl4land && \
     sync
