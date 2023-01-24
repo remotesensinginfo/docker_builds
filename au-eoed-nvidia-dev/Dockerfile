@@ -36,8 +36,9 @@ RUN mamba install --yes -c conda-forge rsgislib gdal h5py parallel scikit-learn 
     && conda clean --all -y; sync
 
 
-RUN pip install matplotlib_scalebar pysptools pysondb tensorflow; sync && \
-   pip install lightgbm --install-option=--gpu; sync
+RUN pip install matplotlib_scalebar pysptools pysondb tensorflow; sync
+# && \
+#   pip install lightgbm --install-option=--gpu; sync
 
 # Install pb_process_tools.
 RUN cd /opt && \
