@@ -27,8 +27,7 @@ RUN mamba install --yes -c conda-forge rsgislib arcsi gdal h5py parallel scikit-
     && chmod +x /opt/miniconda/bin/*; sync \
     && conda clean --all -y; sync
 
-RUN pip install matplotlib_scalebar pysptools pysondb && sync# \
-#    && pip install psycopg2; sync
+RUN pip install matplotlib_scalebar pysptools pysondb ; sync
 
 # Install pb_process_tools.
 RUN cd /opt && \
