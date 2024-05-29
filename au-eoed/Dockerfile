@@ -24,7 +24,7 @@ RUN conda install --yes -c conda-forge python=3.11; sync \
 
 # Install AU EOED software stack
 
-RUN mamba install -c conda-forge rsgislib arcsi gdal geos gsl kealib xerces-c muparser boost-cpp rios scikit-learn scikit-image imbalanced-learn scikit-plot scikit-fuzzy bayesian-optimization optuna matplotlib pandas geopandas statsmodels h5py scipy rasterio shapely networkx sqlalchemy pycurl xgboost catboost lightgbm numba pip sphinx elevation rtree tqdm jinja2 keras parallel bokeh pygal jupyterlab psutil pysal libpysal esda pyyaml netcdf4 xarray rasterstats fiona plotly python-kaleido pyod psycopg2 contextily cvxopt feather-format openpyxl SALib xlsxwriter black flake8 pylint isort pytest pytest-html coverage pytest-cov requests imageio Pillow pyyaml; sync \
+RUN mamba install --yes -c conda-forge rsgislib arcsi gdal geos gsl kealib xerces-c muparser boost-cpp rios scikit-learn scikit-image imbalanced-learn scikit-plot scikit-fuzzy bayesian-optimization optuna matplotlib pandas geopandas statsmodels h5py scipy rasterio shapely networkx sqlalchemy pycurl xgboost catboost lightgbm numba pip sphinx elevation rtree tqdm jinja2 keras parallel bokeh pygal jupyterlab psutil pysal libpysal esda pyyaml netcdf4 xarray rasterstats fiona plotly python-kaleido pyod psycopg2 contextily cvxopt feather-format openpyxl SALib xlsxwriter black flake8 pylint isort pytest pytest-html coverage pytest-cov requests imageio Pillow pyyaml; sync \
 && chmod +x /opt/miniconda/bin/*; sync \
 && conda clean --all -y; sync
 RUN pip install gsutil alphashape pysptools matplotlib-scalebar pysondb BorutaShap fitz PyMuPDF mpl-scatter-density OWSLib mpl_scatter_density tabulate; sync \
