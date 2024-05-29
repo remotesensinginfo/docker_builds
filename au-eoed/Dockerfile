@@ -18,17 +18,17 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
     echo ". /opt/miniconda/etc/profile.d/conda.sh" >> ~/.bashrc && \
     echo "conda activate base" >> ~/.bashrc
 
-# Use python 3.10, install mamba, update conda base
-RUN conda install --yes -c conda-forge python=3.10; sync \
+# Use python 3.11, install mamba, update conda base
+RUN conda install --yes -c conda-forge python=3.11; sync \
     && conda install --yes mamba -n base -c conda-forge; sync
 
 # Install AU EOED software stack
-RUN mamba install --yes -c conda-forge rsgislib=5.0.13 arcsi=4.0.2 gdal=3.6.2 h5py parallel scikit-learn scikit-image scikit-optimize imbalanced-learn scikit-plot scikit-fuzzy bayesian-optimization matplotlib pandas geopandas statsmodels scipy rasterio shapely networkx sqlalchemy pycurl xgboost lightgbm catboost tensorflow alphashape tpot seaborn ml_tooling numba pip sphinx rtree tqdm jinja2 bokeh pygal jupyterlab psutil pysal libpysal esda pyyaml netcdf4 xarray fiona plotly ipywidgets contextily pydot cvxopt feather-format pyod xlsxwriter openpyxl pytables SALib pymcr gsutil mpi4py openmpi psycopg2; sync \
-    && chmod +x /opt/miniconda/bin/*; sync \
-    && conda clean --all -y; sync
 
-RUN pip install matplotlib_scalebar pysptools pysondb; sync
-
+RUN mamba install -c conda-forge rsgislib arcsi gdal geos gsl kealib xerces-c muparser boost-cpp rios scikit-learn scikit-image imbalanced-learn scikit-plot scikit-fuzzy bayesian-optimization optuna matplotlib pandas geopandas statsmodels h5py scipy rasterio shapely networkx sqlalchemy pycurl xgboost catboost lightgbm numba pip sphinx elevation rtree tqdm jinja2 keras parallel bokeh pygal jupyterlab psutil pysal libpysal esda pyyaml netcdf4 xarray rasterstats fiona plotly python-kaleido pyod psycopg2 contextily cvxopt feather-format openpyxl SALib xlsxwriter black flake8 pylint isort pytest pytest-html coverage pytest-cov requests imageio Pillow pyyaml; sync \
+&& chmod +x /opt/miniconda/bin/*; sync \
+&& conda clean --all -y; sync
+RUN pip install gsutil alphashape pysptools matplotlib-scalebar pysondb BorutaShap fitz PyMuPDF mpl-scatter-density OWSLib mpl_scatter_density tabulate; sync \
+RUN pip install azure-storage-blob azure-identity; sync \
 
 # Install pb_process_tools.
 RUN cd /opt && \
