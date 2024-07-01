@@ -7,7 +7,7 @@ ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH=/opt/miniconda/bin:$PATH
 
 RUN apt-get update --fix-missing && \
-    apt-get install -y apt-utils wget bzip2 ca-certificates curl git binutils vim nano pico ne make unzip gcc && \
+    apt-get install -y apt-utils wget bzip2 ca-certificates curl git binutils vim nano ne make unzip gcc && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -19,7 +19,7 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
     echo "conda activate base" >> ~/.bashrc
 
 # Use python 3.12, install mamba, update conda base
-RUN conda install --yes -c conda-forge python=3.12; sync \
+RUN conda install --yes -c conda-forge python=3.11; sync \
     && conda install --yes mamba -n base -c conda-forge; sync
 
 # Install AU EOED software stack
