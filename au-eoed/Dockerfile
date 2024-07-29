@@ -19,11 +19,11 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
     echo "conda activate base" >> ~/.bashrc
 
 # Use python 3.12, install mamba, update conda base
-RUN conda install --yes -c conda-forge python=3.11; sync \
+RUN conda install --yes -c conda-forge python=3.12; sync \
     && conda install --yes mamba -n base -c conda-forge; sync
 
 # Install AU EOED software stack
-RUN mamba install --yes -c conda-forge rsgislib gdal proj-data geos gsl kealib xerces-c muparser boost-cpp rios scikit-learn scikit-image imbalanced-learn scikit-plot scikit-fuzzy bayesian-optimization optuna matplotlib pandas geopandas statsmodels h5py scipy rasterio shapely networkx sqlalchemy pycurl xgboost catboost lightgbm numba pip sphinx elevation rtree tqdm jinja2 keras parallel bokeh pygal jupyterlab psutil pysal libpysal esda pyyaml netcdf4 xarray rasterstats fiona plotly python-kaleido pyod psycopg2 contextily cvxopt feather-format openpyxl SALib xlsxwriter black jupyterlab_code_formatter ruff flake8 pylint isort autopep8 pytest pytest-html coverage pytest-cov requests imageio Pillow pyyaml exiftool Pysolar scikit-gstat; sync \
+RUN mamba install --yes -c conda-forge rsgislib=5.1.7 arcsi=4.0.5 gdal libgdal-arrow-parquet libgdal-fits libgdal-grib libgdal-hdf4 libgdal-hdf5 libgdal-jp2openjpeg libgdal-pg libgdal-kea libgdal-netcdf proj-data geos gsl kealib xerces-c muparser boost-cpp rios scikit-learn scikit-image imbalanced-learn scikit-plot scikit-fuzzy bayesian-optimization optuna matplotlib pandas geopandas statsmodels h5py scipy rasterio shapely networkx sqlalchemy pycurl xgboost catboost lightgbm numba pip sphinx elevation rtree tqdm jinja2 keras parallel bokeh pygal jupyterlab psutil pysal libpysal esda pyyaml netcdf4 xarray rasterstats fiona plotly python-kaleido pyod psycopg2 contextily cvxopt feather-format openpyxl SALib xlsxwriter black jupyterlab_code_formatter ruff flake8 pylint isort autopep8 pytest pytest-html coverage pytest-cov requests imageio Pillow pyyaml exiftool Pysolar scikit-gstat; sync \
 && chmod +x /opt/miniconda/bin/*; sync \
 && conda clean --all -y; sync
 
