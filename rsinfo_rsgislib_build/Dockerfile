@@ -22,17 +22,17 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
     echo ". /opt/miniconda/etc/profile.d/conda.sh" >> ~/.bashrc && \
     echo "conda activate base" >> ~/.bashrc
 
-# Use python 3.11, update conda base and install AU-EOED software stack
-RUN conda install --yes -c conda-forge python=3.11; sync \
+# Use python 3.12, update conda base and install AU-EOED software stack
+RUN conda install --yes -c conda-forge python=3.12; sync \
     && conda update --yes -n base conda; sync \
     && conda install --yes mamba -n base -c conda-forge; sync
     
-RUN mamba install --yes -c au-eoed -c conda-forge python=3.11 gdal geos gsl kealib xerces-c muparser boost-cpp rios scikit-learn scikit-image imbalanced-learn scikit-plot scikit-fuzzy bayesian-optimization optuna matplotlib pandas geopandas statsmodels h5py scipy rasterio shapely networkx sqlalchemy pycurl xgboost catboost lightgbm numba pip sphinx elevation rtree tqdm jinja2 keras parallel bokeh pygal jupyterlab psutil pysal libpysal esda pyyaml netcdf4 xarray rasterstats fiona plotly python-kaleido pyod psycopg2 contextily cvxopt feather-format openpyxl SALib xlsxwriter black flake8 pylint isort pytest pytest-html coverage pytest-cov requests imageio Pillow; sync \
+RUN mamba install --yes -c conda-forge gdal libgdal-arrow-parquet libgdal-fits libgdal-grib libgdal-hdf4 libgdal-hdf5 libgdal-jp2openjpeg libgdal-pg libgdal-kea libgdal-netcdf proj-data geos gsl kealib libboost-devel xerces-c muparser rios scikit-learn scikit-image imbalanced-learn scikit-plot scikit-fuzzy bayesian-optimization optuna matplotlib pandas geopandas statsmodels h5py scipy rasterio shapely networkx sqlalchemy pycurl xgboost catboost lightgbm numba pip sphinx elevation rtree tqdm jinja2 keras parallel bokeh pygal jupyterlab psutil pysal libpysal esda pyyaml netcdf4 xarray rasterstats fiona plotly python-kaleido pyod psycopg2 contextily cvxopt feather-format openpyxl SALib xlsxwriter black jupyterlab_code_formatter ruff flake8 pylint isort autopep8 pytest pytest-html coverage pytest-cov requests imageio Pillow pyyaml exiftool Pysolar; sync \
     && chmod +x /opt/miniconda/bin/*; sync \
     && conda clean --all -y; sync 
 
 
-RUN pip install gsutil alphashape pysptools matplotlib-scalebar pysondb BorutaShap fitz PyMuPDF mpl-scatter-density OWSLib && sync
+RUN pip install gsutil alphashape pysptools matplotlib-scalebar pysondb BorutaShap PyMuPDF mpl-scatter-density OWSLib mpl_scatter_density tabulate pyMCR pyexiftool azure-storage-blob azure-identity qrcode && sync
 
 # set gdal and proj data paths
 ENV GDAL_DATA=/opt/miniconda/share/gdal
@@ -45,5 +45,4 @@ RUN chmod +x /tini
 ENTRYPOINT ["/tini", "--"]
 
 CMD [ "/bin/bash" ]
-
 
